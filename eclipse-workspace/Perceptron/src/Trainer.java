@@ -9,5 +9,9 @@ public class Trainer {
 		inputs[1]=y;
 		inputs[2]=1;
 		answer=a;
+		//answer=0;
+	}
+	Trainer(){
+		
 	}
 }
