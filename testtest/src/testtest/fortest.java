@@ -7,6 +7,7 @@ public class fortest {
 int a;
 
 String network;
+int b;
 	}
 
 }
