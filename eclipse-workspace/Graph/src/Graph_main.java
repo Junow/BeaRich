@@ -15,7 +15,6 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.data.time.Millisecond;
-import org.jfree.data.time.Second;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.XYDataset;
@@ -108,18 +107,17 @@ public class Graph_main extends ApplicationFrame implements ActionListener {
 //                double buy_price = Double.parseDouble(dataObject.get("buy_price").toString());
 //                double sell_price = Double.parseDouble(dataObject.get("sell_price").toString());
 //                String date = (dataObject.get("date").toString());
-                
-                test = opening_price;
-//                Thread.sleep(5000);//5초
-                
 
-                
+                Thread.sleep(10000);
+                test = opening_price;
+
+
+
                 final Graph_main demo = new Graph_main("Dynamic Line And TimeSeries Chart");
                 demo.pack();
                 RefineryUtilities.centerFrameOnScreen(demo);
                 demo.setVisible(true);
-                demo.setBackground(Color.pink);
-//                demo.add(new Second(), test);
+
 
             }
             catch (ParseException e) {
@@ -130,7 +128,11 @@ public class Graph_main extends ApplicationFrame implements ActionListener {
             }
         }
 
-        
+//        final Graph demo = new Graph("Dynamic Line And TimeSeries Chart");
+//                demo.pack();
+//                RefineryUtilities.centerFrameOnScreen(demo);
+//                demo.setVisible(true);
+//                demo.setBackground(Color.pink);
 
 
     }
@@ -149,12 +151,10 @@ public class Graph_main extends ApplicationFrame implements ActionListener {
      * Constructs a new dynamic chart application.
      *
      * @param title  the frame title.
-     * @return 
      */
     @SuppressWarnings("deprecation")
     public Graph_main(final String title) {
         super(title);
-        
 
 //        testNum=num;
         this.series = new TimeSeries("Random Data", Millisecond.class);
@@ -179,7 +179,7 @@ public class Graph_main extends ApplicationFrame implements ActionListener {
 
 
         //Sets the size of whole window (JPanel)
-        chartPanel.setPreferredSize(new java.awt.Dimension(800, 450));
+        chartPanel.setPreferredSize(new java.awt.Dimension(800, 500));
 
         //Puts the whole content on a Frame
         setContentPane(content);
@@ -243,15 +243,14 @@ public class Graph_main extends ApplicationFrame implements ActionListener {
      */
     public void actionPerformed(final ActionEvent e) {
 
-//        final double factor = 0.9 + 0.2*Math.random();
-//        this.lastValue = this.lastValue * factor;
+        final double factor = 0.9 + 0.2*Math.random();
+        this.lastValue = this.lastValue * factor;
 
-        final Millisecond now = new Millisecond(); // 현재시간 
+        final Millisecond now = new Millisecond();
 
-//        this.series.add(new Millisecond(), this.lastValue);
-//        this.series.add(new Millisecond(), test);
-        this.series.add(new Second(), test);
-        System.out.println("Current Time  = " + now.toString()+", Price : "+test);
+        this.series.add(new Millisecond(), this.lastValue);
+
+//        System.out.println("Current Time in Milliseconds = " + now.toString()+", Current Value : "+this.lastValue);
     }
 
 
