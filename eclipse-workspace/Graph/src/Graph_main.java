@@ -66,12 +66,12 @@ public class Graph_main extends ApplicationFrame /*implements ActionListener*/ {
 		while(true) {
 			time2 = System.currentTimeMillis ();
 			//5초에 한번씩만 업데이트할려고 함 time1 time2 차이
-			if((time2-time1)/1000.0 >= 5) {
+			if(Math.abs((time2-time1)/1000.0) >= 5) {
 				time1 = System.currentTimeMillis (); 
 				String coinName = "BTC";
 				StringBuilder sb = null;
 				try {
-					URL url = new URL("https://api.bithumb.com/public/ticker/");
+					URL url = new URL("https://api.bithumb.com/public/ticker/BCH");
 					String postSql = "&offset=0&count=11";
 					URLConnection conn;
 					conn = url.openConnection();
@@ -108,7 +108,7 @@ public class Graph_main extends ApplicationFrame /*implements ActionListener*/ {
 
 
 					String status = jsonObject.get("status").toString();
-					double opening_price = Double.parseDouble(dataObject.get("opening_price").toString());
+//					double opening_price = Double.parseDouble(dataObject.get("opening_price").toString());
 					//                double closing_price = Double.parseDouble(dataObject.get("closing_price").toString());
 					//                double min_price = Double.parseDouble(dataObject.get("min_price").toString());
 					//                double max_price = Double.parseDouble(dataObject.get("max_price").toString());
@@ -116,12 +116,12 @@ public class Graph_main extends ApplicationFrame /*implements ActionListener*/ {
 					//                double units_traded = Double.parseDouble(dataObject.get("units_traded").toString());
 					//                double volume_1day = Double.parseDouble(dataObject.get("volume_1day").toString());
 					//                double volume_7day = Double.parseDouble(dataObject.get("volume_7day").toString());
-					//                double buy_price = Double.parseDouble(dataObject.get("buy_price").toString());
+					                double buy_price = Double.parseDouble(dataObject.get("buy_price").toString());
 					//                double sell_price = Double.parseDouble(dataObject.get("sell_price").toString());
 					//                String date = (dataObject.get("date").toString());
 
 					//                Thread.sleep(5000);
-					new_price = opening_price;
+					new_price = buy_price;
 					final Millisecond now = new Millisecond();
 					//                final Second now = new Second();
 					series.add(new Millisecond(), new_price);
@@ -220,7 +220,9 @@ public class Graph_main extends ApplicationFrame /*implements ActionListener*/ {
 
 		final XYPlot plot = result.getXYPlot();
 
-		plot.setBackgroundPaint(new Color(0xffffe0));
+//		plot.setBackgroundPaint(new Color(0xffffe0));
+		plot.setBackgroundPaint(new Color(128,128,128));
+		
 		plot.setDomainGridlinesVisible(true);
 		plot.setDomainGridlinePaint(Color.white);
 		plot.setRangeGridlinesVisible(true);
@@ -241,10 +243,12 @@ public class Graph_main extends ApplicationFrame /*implements ActionListener*/ {
 		//Domain axis would show data of 60 seconds for a time
 		xaxis.setFixedAutoRange(60000.0);  // 60 seconds //갱신주기?
 		xaxis.setVerticalTickLabels(true);
-
+//		xaxis.setAxisLinePaint(Color.pink);
+		
+		
 		ValueAxis yaxis = plot.getRangeAxis();
 		yaxis.setRange(7580000.0, 7610000.0); // y축 범위
-
+		yaxis.setAutoRange(true);
 		return result;
 	}
 	/**
