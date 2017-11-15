@@ -1,5 +1,3 @@
-
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -45,8 +43,9 @@ import org.json.*;
  */
 
 @SuppressWarnings("serial")
-public class Graph_main extends ApplicationFrame /*implements ActionListener*/ {
+public class Graph_main /*implements ActionListener*/ {
 
+	private static TimeSeries series;
 	static double new_price=0;
 	//    static double test=0;
 	/**
@@ -58,11 +57,14 @@ public class Graph_main extends ApplicationFrame /*implements ActionListener*/ {
 		long time1 = System.currentTimeMillis (); 
 		long time2 = System.currentTimeMillis ();
 
+		
 
-		final Graph_main demo = new Graph_main("Dynamic Line And TimeSeries Chart");
+		final ShowGraph demo = new ShowGraph("Dynamic Line And TimeSeries Chart");
 		demo.pack();
 		RefineryUtilities.centerFrameOnScreen(demo);
 		demo.setVisible(true);
+		series = demo.getSeries();
+
 		while(true) {
 			time2 = System.currentTimeMillis ();
 			//5초에 한번씩만 업데이트할려고 함 time1 time2 차이
@@ -108,7 +110,7 @@ public class Graph_main extends ApplicationFrame /*implements ActionListener*/ {
 
 
 					String status = jsonObject.get("status").toString();
-//					double opening_price = Double.parseDouble(dataObject.get("opening_price").toString());
+					//					double opening_price = Double.parseDouble(dataObject.get("opening_price").toString());
 					//                double closing_price = Double.parseDouble(dataObject.get("closing_price").toString());
 					//                double min_price = Double.parseDouble(dataObject.get("min_price").toString());
 					//                double max_price = Double.parseDouble(dataObject.get("max_price").toString());
@@ -116,7 +118,7 @@ public class Graph_main extends ApplicationFrame /*implements ActionListener*/ {
 					//                double units_traded = Double.parseDouble(dataObject.get("units_traded").toString());
 					//                double volume_1day = Double.parseDouble(dataObject.get("volume_1day").toString());
 					//                double volume_7day = Double.parseDouble(dataObject.get("volume_7day").toString());
-					                double buy_price = Double.parseDouble(dataObject.get("buy_price").toString());
+					double buy_price = Double.parseDouble(dataObject.get("buy_price").toString());
 					//                double sell_price = Double.parseDouble(dataObject.get("sell_price").toString());
 					//                String date = (dataObject.get("date").toString());
 
@@ -147,14 +149,14 @@ public class Graph_main extends ApplicationFrame /*implements ActionListener*/ {
 
 		}
 	}
+}
 
 
 	/** The time series data. */
-	private static TimeSeries series;
+
 
 	/** The most recent value added. */
-	private double lastValue = 100.0;
-	public double testNum=0;
+	//	private double lastValue = 100.0;
 	/** Timer to refresh graph after every 1/4th of a second */
 	//    private Timer timer = new Timer(1000, this);
 
@@ -163,113 +165,3 @@ public class Graph_main extends ApplicationFrame /*implements ActionListener*/ {
 	 *
 	 * @param title  the frame title.
 	 */
-	@SuppressWarnings("deprecation") 
-	// 생성자 
-	public Graph_main(final String title) {
-		super(title);
-
-		//        testNum=num;
-		this.series = new TimeSeries("Random Data", Millisecond.class);
-
-		final TimeSeriesCollection dataset = new TimeSeriesCollection(this.series);
-		final JFreeChart chart = createChart(dataset);
-
-		//        timer.setInitialDelay(10000);
-
-		//Sets background color of chart 아예뒤쪾
-		chart.setBackgroundPaint(Color.white);
-		chart.setBorderPaint(Color.black);
-
-		//Created JPanel to show graph on screen
-		final JPanel content = new JPanel(new BorderLayout());
-
-		//Created Chartpanel for chart area
-		final ChartPanel chartPanel = new ChartPanel(chart);
-
-		//Added chartpanel to main panel
-		content.add(chartPanel);
-
-
-		//Sets the size of whole window (JPanel)
-		chartPanel.setPreferredSize(new java.awt.Dimension(1200, 700));
-
-		//Puts the whole content on a Frame
-		setContentPane(content);
-
-		//        timer.start();
-
-	}
-
-	/**
-	 * Creates a sample chart.
-	 *
-	 * @param dataset  the dataset.
-	 *
-	 * @return A sample chart.
-	 */
-	private JFreeChart createChart(final XYDataset dataset) {
-		final JFreeChart result = ChartFactory.createTimeSeriesChart(
-				"BeARich",
-				"Time",
-				"Price",
-				dataset,
-				true,
-				true,
-				false
-				);
-
-		final XYPlot plot = result.getXYPlot();
-
-//		plot.setBackgroundPaint(new Color(0xffffe0));
-		plot.setBackgroundPaint(new Color(128,128,128));
-		
-		plot.setDomainGridlinesVisible(true);
-		plot.setDomainGridlinePaint(Color.white);
-		plot.setRangeGridlinesVisible(true);
-		plot.setRangeGridlinePaint(Color.black);
-		plot.setRangeCrosshairPaint(Color.white);
-
-		plot.setDomainGridlinesVisible(false);
-		plot.setRangeGridlinePaint(Color.pink);
-		plot.setRangeGridlinesVisible(false);
-		//        plot.isDomainZoomable();
-
-		//        plot.setDomainTickBandPaint(Color.pink);
-		//        plot.setDomainZeroBaselinePaint(Color.pink);
-
-		ValueAxis xaxis = plot.getDomainAxis();
-		xaxis.setAutoRange(true);
-
-		//Domain axis would show data of 60 seconds for a time
-		xaxis.setFixedAutoRange(60000.0);  // 60 seconds //갱신주기?
-		xaxis.setVerticalTickLabels(true);
-//		xaxis.setAxisLinePaint(Color.pink);
-		
-		
-		ValueAxis yaxis = plot.getRangeAxis();
-		yaxis.setRange(7580000.0, 7610000.0); // y축 범위
-		yaxis.setAutoRange(true);
-		return result;
-	}
-	/**
-	 * Generates an random entry for a particular call
-     made by time for every 1/4th of a second.
-	 *
-	 * @param e  the action event.
-	 */
-	//    public void actionPerformed(final ActionEvent e) {
-	//
-	////        final double factor = 0.9 + 0.2*Math.random();
-	////        this.lastValue = this.lastValue * factor;
-	//
-	//        final Millisecond now = new Millisecond();
-	//
-	//        this.series.add(new Millisecond(), new_price);
-	//
-	////        System.out.println("Current Time in Milliseconds = " + now.toString()+", Current Value : "+new_price);
-	//    }
-
-
-}
-
-
