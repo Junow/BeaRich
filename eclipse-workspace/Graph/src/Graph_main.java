@@ -21,9 +21,6 @@ import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RefineryUtilities;
 import org.jfree.*;
 
-
-
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -57,8 +54,9 @@ public class Graph_main /*implements ActionListener*/ {
 		long time1 = System.currentTimeMillis (); 
 		long time2 = System.currentTimeMillis ();
 
+		Random_price virtual = new Random_price();
+		double virtual_price = 0;
 		
-
 		final ShowGraph demo = new ShowGraph("Dynamic Line And TimeSeries Chart");
 		demo.pack();
 		RefineryUtilities.centerFrameOnScreen(demo);
@@ -70,10 +68,11 @@ public class Graph_main /*implements ActionListener*/ {
 			//5초에 한번씩만 업데이트할려고 함 time1 time2 차이
 			if(Math.abs((time2-time1)/1000.0) >= 5) {
 				time1 = System.currentTimeMillis (); 
-				String coinName = "BTC";
+//				* {currency} = BTC, ETH, DASH, LTC, ETC, XRP, BCH, XMR, ZEC, QTUM (기본값: BTC), ALL(전체)
+				String coinName = "BTC"; 
 				StringBuilder sb = null;
 				try {
-					URL url = new URL("https://api.bithumb.com/public/ticker/BCH");
+					URL url = new URL("https://api.bithumb.com/public/ticker/"+coinName);
 					String postSql = "&offset=0&count=11";
 					URLConnection conn;
 					conn = url.openConnection();
@@ -99,8 +98,6 @@ public class Graph_main /*implements ActionListener*/ {
 
 				String newSb = sb.toString();
 
-
-
 				try {
 					JSONParser jsonParser = new JSONParser();
 
@@ -109,7 +106,7 @@ public class Graph_main /*implements ActionListener*/ {
 
 
 
-					String status = jsonObject.get("status").toString();
+					//					String status = jsonObject.get("status").toString();
 					//					double opening_price = Double.parseDouble(dataObject.get("opening_price").toString());
 					//                double closing_price = Double.parseDouble(dataObject.get("closing_price").toString());
 					//                double min_price = Double.parseDouble(dataObject.get("min_price").toString());
@@ -124,14 +121,24 @@ public class Graph_main /*implements ActionListener*/ {
 
 					//                Thread.sleep(5000);
 					new_price = buy_price;
-					final Millisecond now = new Millisecond();
+//					final Millisecond now = new Millisecond();
 					//                final Second now = new Second();
-					series.add(new Millisecond(), new_price);
-					System.out.println("new price : " + new_price);
-
-
-
-
+					
+					virtual_price = virtual.getVirtual_price(new_price);
+					
+					System.out.println("virtual : " + virtual_price);
+					
+					if(Math.abs(virtual_price - new_price) > new_price*0.98 && Math.abs(virtual_price - new_price) < new_price*1.02) {
+						System.out.println("virtual : "+virtual_price);
+						series.add(new Millisecond(), virtual_price);
+					}
+					else {
+						double half_new_vir = (new_price + virtual_price)/2;
+						System.out.println("half : "+half_new_vir);
+						series.add(new Millisecond(), half_new_vir);
+					}
+					
+					
 				}
 				catch (ParseException e) {
 					e.printStackTrace();

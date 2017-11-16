@@ -21,22 +21,19 @@ import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RefineryUtilities;
 import org.jfree.*;
 
-
-
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.URL;
-import java.net.URLConnection;
-
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
-import org.json.*;
+//import java.io.BufferedReader;
+//import java.io.IOException;
+//import java.io.InputStreamReader;
+//import java.io.OutputStreamWriter;
+//import java.net.URL;
+//import java.net.URLConnection;
+//
+//import org.json.simple.JSONArray;
+//import org.json.simple.JSONObject;
+//import org.json.simple.parser.JSONParser;
+//import org.json.simple.parser.ParseException;
+//
+//import org.json.*;
 
 @SuppressWarnings("serial")
 public class ShowGraph  extends ApplicationFrame{
@@ -48,9 +45,9 @@ public class ShowGraph  extends ApplicationFrame{
 	public ShowGraph(final String title) {
 		super(title);
 
-		this.series = new TimeSeries("Random Data", Millisecond.class);
+		series = new TimeSeries("Random Data", Millisecond.class);
 
-		final TimeSeriesCollection dataset = new TimeSeriesCollection(this.series);
+		final TimeSeriesCollection dataset = new TimeSeriesCollection(series);
 		final JFreeChart chart = createChart(dataset);
 
 		//        timer.setInitialDelay(10000);
@@ -105,9 +102,9 @@ public class ShowGraph  extends ApplicationFrame{
 				);
 
 		final XYPlot plot = result.getXYPlot();
-
+		
 //		plot.setBackgroundPaint(new Color(0xffffe0));
-		plot.setBackgroundPaint(new Color(128,128,128));
+		plot.setBackgroundPaint(new Color(128,128,128)); // background color
 		
 		plot.setDomainGridlinesVisible(true);
 		plot.setDomainGridlinePaint(Color.white);
