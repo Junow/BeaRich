@@ -33,6 +33,11 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
 import org.json.*;
 
 /**
@@ -57,12 +62,14 @@ public class Graph_main /*implements ActionListener*/ {
 		Random_price virtual = new Random_price();
 		double virtual_price = 0;
 		
-		final ShowGraph demo = new ShowGraph("Dynamic Line And TimeSeries Chart");
+		final ShowGraph demo = new ShowGraph("Be A Rich");
 		demo.pack();
 		RefineryUtilities.centerFrameOnScreen(demo);
 		demo.setVisible(true);
 		series = demo.getSeries();
+		
 
+		
 		while(true) {
 			time2 = System.currentTimeMillis ();
 			//5초에 한번씩만 업데이트할려고 함 time1 time2 차이
@@ -119,10 +126,7 @@ public class Graph_main /*implements ActionListener*/ {
 					//                double sell_price = Double.parseDouble(dataObject.get("sell_price").toString());
 					//                String date = (dataObject.get("date").toString());
 
-					//                Thread.sleep(5000);
 					new_price = buy_price;
-//					final Millisecond now = new Millisecond();
-					//                final Second now = new Second();
 					
 					virtual_price = virtual.getVirtual_price(new_price);
 					
@@ -143,19 +147,23 @@ public class Graph_main /*implements ActionListener*/ {
 				catch (ParseException e) {
 					e.printStackTrace();
 				}
-				//            catch(InterruptedException e){
-				//                e.printStackTrace();
-				//            }
+			
 			}
 
-			//        final Graph demo = new Graph("Dynamic Line And TimeSeries Chart");
-			//                demo.pack();
-			//                RefineryUtilities.centerFrameOnScreen(demo);
-			//                demo.setVisible(true);
-			//                demo.setBackground(Color.pink);
+			
 
 		}
 	}
+	
+	public void start(Stage stage) throws Exception {
+	       Parent root = FXMLLoader.load(getClass().getResource("fxml_example.fxml"));
+	    
+	        Scene scene = new Scene(root, 300, 275);
+	    
+	        stage.setTitle("FXML Welcome");
+	        stage.setScene(scene);
+	        stage.show();
+	    }
 }
 
 
