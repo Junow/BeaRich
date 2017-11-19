@@ -45,30 +45,15 @@ import org.json.*;
  * An example to show how we can create a dynamic chart.
  */
 
-@SuppressWarnings("serial")
 public class Graph_main /*implements ActionListener*/ {
-
-//	@Override
-//    public void start(Stage primaryStage) throws Exception{
-//        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-//        primaryStage.setTitle("javafx program");
-//        primaryStage.setScene(new Scene(root, 300, 275));
-//        primaryStage.show();
-//    }
 	private static TimeSeries series;
 	static double new_price=0;
-	//    static double test=0;
-	/**
-	 * Starting point for the dynamic graph application.
-	 *
-	 * @param args  ignored.
-	 */
+	
+	
 	public static void main(final String[] args){
 //		launch(args);
 		long time1 = System.currentTimeMillis (); 
 		long time2 = System.currentTimeMillis ();
-		
-		String sb="";
 		
 		Random_price virtual = new Random_price();
 		getPrice get_price = new getPrice();
@@ -80,8 +65,6 @@ public class Graph_main /*implements ActionListener*/ {
 		demo.setVisible(true);
 		series = demo.getSeries();
 		
-
-		
 		while(true) {
 			time2 = System.currentTimeMillis ();
 			//5초에 한번씩만 업데이트할려고 함 time1 time2 차이
@@ -92,35 +75,21 @@ public class Graph_main /*implements ActionListener*/ {
 					
 					virtual_price = virtual.getVirtual_price(new_price);
 					
-					System.out.println("virtual : " + virtual_price);
+//					System.out.println("virtual : " + virtual_price);
 					
 					if(Math.abs(virtual_price - new_price) > new_price*0.98 && Math.abs(virtual_price - new_price) < new_price*1.02) {
-						System.out.println("virtual : "+virtual_price);
+//						System.out.println("virtual : "+virtual_price);
 						series.add(new Millisecond(), virtual_price);
 					}
 					else {
 						double half_new_vir = (new_price + virtual_price)/2;
-						System.out.println("half : "+half_new_vir);
+//						System.out.println("half : "+half_new_vir);
 						series.add(new Millisecond(), half_new_vir);
 					}
 			}
 		}
 	}
 	
-	
 }
 
 
-	/** The time series data. */
-
-
-	/** The most recent value added. */
-	//	private double lastValue = 100.0;
-	/** Timer to refresh graph after every 1/4th of a second */
-	//    private Timer timer = new Timer(1000, this);
-
-	/**
-	 * Constructs a new dynamic chart application.
-	 *
-	 * @param title  the frame title.
-	 */
