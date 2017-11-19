@@ -33,6 +33,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -47,6 +48,13 @@ import org.json.*;
 @SuppressWarnings("serial")
 public class Graph_main /*implements ActionListener*/ {
 
+//	@Override
+//    public void start(Stage primaryStage) throws Exception{
+//        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+//        primaryStage.setTitle("javafx program");
+//        primaryStage.setScene(new Scene(root, 300, 275));
+//        primaryStage.show();
+//    }
 	private static TimeSeries series;
 	static double new_price=0;
 	//    static double test=0;
@@ -55,11 +63,15 @@ public class Graph_main /*implements ActionListener*/ {
 	 *
 	 * @param args  ignored.
 	 */
-	public static void main(final String[] args) {
+	public static void main(final String[] args){
+//		launch(args);
 		long time1 = System.currentTimeMillis (); 
 		long time2 = System.currentTimeMillis ();
-
+		
+		String sb="";
+		
 		Random_price virtual = new Random_price();
+		getPrice get_price = new getPrice();
 		double virtual_price = 0;
 		
 		final ShowGraph demo = new ShowGraph("Be A Rich");
@@ -76,57 +88,7 @@ public class Graph_main /*implements ActionListener*/ {
 			if(Math.abs((time2-time1)/1000.0) >= 5) {
 				time1 = System.currentTimeMillis (); 
 //				* {currency} = BTC, ETH, DASH, LTC, ETC, XRP, BCH, XMR, ZEC, QTUM (기본값: BTC), ALL(전체)
-				String coinName = "BTC"; 
-				StringBuilder sb = null;
-				try {
-					URL url = new URL("https://api.bithumb.com/public/ticker/"+coinName);
-					String postSql = "&offset=0&count=11";
-					URLConnection conn;
-					conn = url.openConnection();
-
-					conn.setDoOutput(true);
-					OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
-					wr.write(postSql);
-					wr.flush();
-					BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-					sb = new StringBuilder();
-					String line = null;
-
-					while ((line = reader.readLine()) != null) {
-
-						sb.append(line + "\n");
-					}
-					//                System.out.println(sb);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-
-				///////////////////////////////////////////////////////////////////
-
-				String newSb = sb.toString();
-
-				try {
-					JSONParser jsonParser = new JSONParser();
-
-					JSONObject jsonObject = (JSONObject) jsonParser.parse(newSb);
-					JSONObject dataObject = (JSONObject) jsonObject.get("data");
-
-
-
-					//					String status = jsonObject.get("status").toString();
-					//					double opening_price = Double.parseDouble(dataObject.get("opening_price").toString());
-					//                double closing_price = Double.parseDouble(dataObject.get("closing_price").toString());
-					//                double min_price = Double.parseDouble(dataObject.get("min_price").toString());
-					//                double max_price = Double.parseDouble(dataObject.get("max_price").toString());
-					//                double average_price = Double.parseDouble(dataObject.get("average_price").toString());
-					//                double units_traded = Double.parseDouble(dataObject.get("units_traded").toString());
-					//                double volume_1day = Double.parseDouble(dataObject.get("volume_1day").toString());
-					//                double volume_7day = Double.parseDouble(dataObject.get("volume_7day").toString());
-					double buy_price = Double.parseDouble(dataObject.get("buy_price").toString());
-					//                double sell_price = Double.parseDouble(dataObject.get("sell_price").toString());
-					//                String date = (dataObject.get("date").toString());
-
-					new_price = buy_price;
+					new_price = get_price.get_price(get_price.connect("BTC"));
 					
 					virtual_price = virtual.getVirtual_price(new_price);
 					
@@ -141,29 +103,11 @@ public class Graph_main /*implements ActionListener*/ {
 						System.out.println("half : "+half_new_vir);
 						series.add(new Millisecond(), half_new_vir);
 					}
-					
-					
-				}
-				catch (ParseException e) {
-					e.printStackTrace();
-				}
-			
 			}
-
-			
-
 		}
 	}
 	
-	public void start(Stage stage) throws Exception {
-	       Parent root = FXMLLoader.load(getClass().getResource("fxml_example.fxml"));
-	    
-	        Scene scene = new Scene(root, 300, 275);
-	    
-	        stage.setTitle("FXML Welcome");
-	        stage.setScene(scene);
-	        stage.show();
-	    }
+	
 }
 
 
