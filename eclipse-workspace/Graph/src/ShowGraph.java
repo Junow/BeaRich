@@ -27,20 +27,7 @@ import org.jfree.data.xy.XYDataset;
 import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RefineryUtilities;
 import org.jfree.*;
-
-//import java.io.BufferedReader;
-//import java.io.IOException;
-//import java.io.InputStreamReader;
-//import java.io.OutputStreamWriter;
-//import java.net.URL;
-//import java.net.URLConnection;
-//
-//import org.json.simple.JSONArray;
-//import org.json.simple.JSONObject;
-//import org.json.simple.parser.JSONParser;
-//import org.json.simple.parser.ParseException;
-//
-//import org.json.*;
+import org.jfree.chart.axis.CategoryLabelPositions;
 
 @SuppressWarnings("serial")
 public class ShowGraph  extends ApplicationFrame{
@@ -58,67 +45,29 @@ public class ShowGraph  extends ApplicationFrame{
 		final JFreeChart chart = createChart(dataset);
 
 		chart.setBorderPaint(Color.BLUE);
-		//        timer.setInitialDelay(10000);
-
-		//Sets background color of chart 아예뒤쪾
-//		chart.setBackgroundPaint(Color.white);
-//		chart.setBorderPaint(Color.black);
 
 		
-		//Created JPanel to show graph on screen
 		final JPanel content = new JPanel();
 		//Created Chartpanel for chart area
 		final ChartPanel chartPanel = new ChartPanel(chart);
 
-//		chartPanel.setPreferredSize(new Dimension(400,600));
-//		chartPanel.setSize(new Dimension(200,300));
 		chartPanel.setAutoscrolls(true);
-//		chartPanel.setVisible(false); 
-	
-//		JScrollPane scrollPane = new JScrollPane(chartPanel);
-		
-//		scrollPane.setViewportView(chartPanel);     
-//		scrollPane.setSize(new Dimension(1450,750));
-//		scrollPane.setPreferredSize(new Dimension(1450, 750));
-//		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-//		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-//		scrollPane.getVerticalScrollBar().setValue(scrollPane.getVerticalScrollBar().getMaximum());
-////		scrollPane.getVerticalScrollBar();
-////		scrollPane.getHorizontalScrollBar();
-//		scrollPane.createVerticalScrollBar();
-//		scrollPane.createHorizontalScrollBar();
-//		scrollPane.setBounds(1500, 800, 1500, 800);
-		
-//		scrollPane.getViewport();
-
-		//Added chartpanel to main panel
 		
 
 		content.add(chartPanel,BorderLayout.EAST);	
 		content.setPreferredSize(new Dimension(1400,700));      // size of screen
 		chartPanel.setHorizontalAxisTrace(true);
 		chartPanel.setVerticalAxisTrace(true);
-//		chartPanel.setAutoscrolls(true);
-//		chartPanel.getComponentAt(getLocation());
-//		chartPanel.getMousePosition();
 		content.setBackground(Color.white);
-//		scrollPane.getVerticalScrollBar().setValue(scrollPane.getVerticalScrollBar().getMaximum());
-//		scrollPane.getHorizontalScrollBar().setValue(scrollPane.getHorizontalScrollBar().getMaximum());
-
-//		content.add(scrollPane,BorderLayout.EAST);
-
-//		content.add(scrollBar,BorderLayout.SOUTH);
-//		chartPanel.add(scrollBar);
-//		this.pack();
-		//Sets the size of whole window (JPanel)
 		chartPanel.setPreferredSize(new Dimension(900, 700)); // size of graph
 		chartPanel.setChart(chart);
 
+		JScrollPane js = new JScrollPane(chartPanel);
+		js.setPreferredSize(new Dimension(2000,1000));
 		
 		//Puts the whole content on a Frame
 		setContentPane(content);
 		
-		//        timer.start();
 
 	}
 
@@ -153,11 +102,7 @@ public class ShowGraph  extends ApplicationFrame{
 		
 
 		final XYPlot plot = result.getXYPlot();
-//		plot.setDomainPannable(true);
-//		plot.setRangePannable(true);
-		
-//		plot.setBackgroundPaint(new Color(0xffffe0));
-//		plot.setBackgroundPaint(new Color(128,128,128)); // background color
+
 		plot.setBackgroundPaint(Color.white);
 		
 		plot.setDomainGridlinesVisible(true);
@@ -169,23 +114,21 @@ public class ShowGraph  extends ApplicationFrame{
 		plot.setDomainGridlinesVisible(false);
 		plot.setRangeGridlinePaint(Color.pink);
 		plot.setRangeGridlinesVisible(false);
-		//        plot.isDomainZoomable();
-
-		//        plot.setDomainTickBandPaint(Color.pink);
-		//        plot.setDomainZeroBaselinePaint(Color.pink);
 
 		ValueAxis xaxis = plot.getDomainAxis();
+//		xaxis.setLabelAngle( 90 * (Math.PI / 180.0) ); // time rotate
 		xaxis.setAutoRange(true);
-		
+		xaxis.setLabel("time");
 		//Domain axis would show data of 60 seconds for a time
-		xaxis.setFixedAutoRange(60000.0);  // 60 seconds //갱신주기?
-		xaxis.setVerticalTickLabels(true);
-//		xaxis.setAxisLinePaint(Color.pink);
+//		xaxis.setFixedAutoRange(60000.0);  // size
+		xaxis.setVerticalTickLabels(false); // vertical or horizon
 		
 		ValueAxis yaxis = plot.getRangeAxis();
-		yaxis.setRange(8380000.0, 9010000.0); // y축 범위
+		yaxis.setLabel("price");
+//		yaxis.setRange(8380000.0, 9010000.0); // y축 범위
 		yaxis.setAutoRange(true);
 		yaxis.setAxisLinePaint(Color.black);
+		
 		this.setSize(new Dimension(800,400));
 		
 
@@ -194,7 +137,6 @@ public class ShowGraph  extends ApplicationFrame{
 
 	private void setLayout(String east) {
 		// TODO Auto-generated method stub
-		
 	}
 	
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

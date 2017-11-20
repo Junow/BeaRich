@@ -68,7 +68,7 @@ public class Graph_main /*implements ActionListener*/ {
 		while(true) {
 			time2 = System.currentTimeMillis ();
 			//5초에 한번씩만 업데이트할려고 함 time1 time2 차이
-			if(Math.abs((time2-time1)/1000.0) >= 5) {
+			if(Math.abs((time2-time1)/1000.0) >= 3) {
 				time1 = System.currentTimeMillis (); 
 //				* {currency} = BTC, ETH, DASH, LTC, ETC, XRP, BCH, XMR, ZEC, QTUM (기본값: BTC), ALL(전체)
 					new_price = get_price.get_price(get_price.connect("BTC"));

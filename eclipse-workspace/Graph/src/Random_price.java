@@ -26,7 +26,7 @@ public class Random_price {
 //		else {
 //			weight-=1;
 //		}
-		System.out.println("weight : " + weight);
+//		System.out.println("weight : " + weight);
 		virtual_price = (new_price * weight);
 		
 		return this.virtual_price;
