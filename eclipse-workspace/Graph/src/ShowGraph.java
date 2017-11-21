@@ -1,33 +1,23 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.AdjustmentEvent;
-import java.awt.event.AdjustmentListener;
 
-import javax.swing.Timer;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 //import com.sun.org.apache.xpath.internal.functions.FuncFalse;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.axis.DateAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.data.time.Millisecond;
-import org.jfree.data.time.Second;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.ui.ApplicationFrame;
-import org.jfree.ui.RefineryUtilities;
-import org.jfree.*;
-import org.jfree.chart.axis.CategoryLabelPositions;
 
 @SuppressWarnings("serial")
 public class ShowGraph  extends ApplicationFrame{
@@ -41,32 +31,58 @@ public class ShowGraph  extends ApplicationFrame{
 
 		series = new TimeSeries("", Millisecond.class);
 		
+//		JFrame frame = new JFrame("prac");
 		final TimeSeriesCollection dataset = new TimeSeriesCollection(series);
 		final JFreeChart chart = createChart(dataset);
 
-		chart.setBorderPaint(Color.BLUE);
+		chart.setBorderPaint(Color.BLACK);
 
 		
-		final JPanel content = new JPanel();
+		final JPanel content = new JPanel(new BorderLayout());
 		//Created Chartpanel for chart area
 		final ChartPanel chartPanel = new ChartPanel(chart);
-
-		chartPanel.setAutoscrolls(true);
 		
-
-		content.add(chartPanel,BorderLayout.EAST);	
-		content.setPreferredSize(new Dimension(1400,700));      // size of screen
+		JTextArea messageArea = new JTextArea(20, 20); // just for test must be deleted.
+		
+		JFrame frame = new JFrame(title);
+		
+		
+		chartPanel.setAutoscrolls(true);
+	
+		frame.setPreferredSize(new Dimension(1200,600)); // size of frame.
+		frame.setBackground(Color.white);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // when close the frame, the program exit
+		
+		frame.pack();
+		
+		content.add(chartPanel);	
+		content.setBackground(Color.white);
+		content.setBounds(20,30,1,5);
+		content.setPreferredSize(new Dimension(1200,600));      // size of screen
 		chartPanel.setHorizontalAxisTrace(true);
 		chartPanel.setVerticalAxisTrace(true);
-		content.setBackground(Color.white);
-		chartPanel.setPreferredSize(new Dimension(900, 700)); // size of graph
+		chartPanel.setPreferredSize(new Dimension(800, 600)); // size of graph
+		chartPanel.setBounds(40,30,910,570); // must be needed to show graph............. controls location of graph
 		chartPanel.setChart(chart);
-
-		JScrollPane js = new JScrollPane(chartPanel);
-		js.setPreferredSize(new Dimension(2000,1000));
+		
+	
+		
+//		content.setLayout(new BorderLayout());
+//		frame.getContentPane().add(content,"Center");
+//		JScrollPane js = new JScrollPane(chartPanel);
+//		js.setPreferredSize(new Dimension(2000,1000));
 		
 		//Puts the whole content on a Frame
 		setContentPane(content);
+		
+		
+		frame.add(new JScrollPane(messageArea), "East");  // just for test must be deleted.
+//		frame.getContentPane().add(new JScrollPane(messageArea), "East"); // 
+		frame.add(chartPanel, "West");
+		frame.add(content,BorderLayout.WEST); // jpanel into frame
+//		frame.getContentPane().add(chartPanel, "West");
+		
+		frame.setVisible(true);
 		
 
 	}
@@ -90,7 +106,7 @@ public class ShowGraph  extends ApplicationFrame{
 
 		
 		final JFreeChart result = ChartFactory.createTimeSeriesChart(
-				"BeARich",
+				"",
 				"",
 				"",
 				dataset,

@@ -60,9 +60,10 @@ public class Graph_main /*implements ActionListener*/ {
 		double virtual_price = 0;
 		
 		final ShowGraph demo = new ShowGraph("Be A Rich");
-		demo.pack();
-		RefineryUtilities.centerFrameOnScreen(demo);
-		demo.setVisible(true);
+//		demo.pack();
+//		RefineryUtilities.centerFrameOnScreen(demo);
+//		demo.setVisible(true);
+		
 		series = demo.getSeries();
 		
 		while(true) {
@@ -77,7 +78,7 @@ public class Graph_main /*implements ActionListener*/ {
 					
 //					System.out.println("virtual : " + virtual_price);
 					
-					if(Math.abs(virtual_price - new_price) > new_price*0.98 && Math.abs(virtual_price - new_price) < new_price*1.02) {
+					if(Math.abs(virtual_price - new_price) > new_price*0.99 && Math.abs(virtual_price - new_price) < new_price*1.01) {
 //						System.out.println("virtual : "+virtual_price);
 						series.add(new Millisecond(), virtual_price);
 					}
