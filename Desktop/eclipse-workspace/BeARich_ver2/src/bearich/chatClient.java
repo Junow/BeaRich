@@ -113,8 +113,8 @@ public chatClient(String title) {
 				priceThread thr = new priceThread(socket,super.getSeries(), newPrice);
 				thr.start();
 				}
-//				series.add(new Millisecond(), Double.parseDouble(line.substring(6)));
 			}
+			
 		}
 	}
 

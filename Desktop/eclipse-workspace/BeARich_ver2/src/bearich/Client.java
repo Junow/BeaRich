@@ -20,6 +20,7 @@ import javax.swing.SwingConstants;
 
 import org.jfree.data.time.Millisecond;
 import org.jfree.data.time.TimeSeries;
+import org.jfree.ui.RefineryUtilities;
 
 import javax.swing.JButton;
 
@@ -29,8 +30,6 @@ public class Client {
 
 
 	
-	
-	
 	public static void main(String[] args) throws Exception {
 		
 		String title = "BeARich";
@@ -38,14 +37,10 @@ public class Client {
 		chatClient chat_client = new chatClient(title);
 		chat_client.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		chat_client.frame.setVisible(true);
+		RefineryUtilities.centerFrameOnScreen(chat_client.frame);
 		chat_client.chatMain();
-		
-//		
-		
 	}
 	
-	
-
 }
 
 
