@@ -2,11 +2,8 @@ package bearich;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.IOException;
 
 import javax.swing.JButton;
@@ -27,10 +24,8 @@ import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.ui.ApplicationFrame;
 
-import com.sun.javafx.charts.Legend;
-
-public class ShowFrame extends ApplicationFrame{
-	static JFrame frame = new JFrame("BeARich"); // Main Frame
+public class ShowFrame extends ApplicationFrame {
+	static JFrame frame = new JFrame("UI"); // Main Frame
 	JTextField textField = new JTextField(22);
 	JTextArea messageArea = new JTextArea(45, 22);
 
@@ -104,24 +99,18 @@ public class ShowFrame extends ApplicationFrame{
 		chart = createChart(dataset);
 		chartPanel = new ChartPanel(chart); 
 		chartJPanel.add(chartPanel);
-		
 		chartPanel.setPreferredSize(new Dimension(1000,765)); // set chart size
-		//////////		//////////		//////////		//////////		//////////		//////////		//////////		//////////		//////////		//////////		//////////		//////////
-		chartPanel.setMouseWheelEnabled(true);
-		//////////		//////////		//////////		//////////		//////////		//////////		//////////		//////////		//////////		//////////		//////////		//////////	
+		
+		
 		//////////    add text field, message Area ////////////
 		
 		chatPanel.add(new JScrollPane(messageArea), "Center");
 		chatPanel.add(textField, "South");
-		
-		chatPanel.setBackground(new Color(90,94,96));
-		chartJPanel.setBackground(new Color(90,94,96));
-		buttonPanel.setBackground(new Color(90,94,96));
-		chart.setBackgroundPaint(new Color(90,94,96));
-		textField.setBackground(new Color(240,240,240));
-		messageArea.setBackground(new Color(240,240,240));
-		
-		
+
+
+
+
+
 		textField.setEditable(false);
 		messageArea.setEditable(false);
 
@@ -152,35 +141,29 @@ public class ShowFrame extends ApplicationFrame{
 		plot.setBackgroundPaint(Color.white);
 		
 		plot.setDomainGridlinesVisible(true);
+		plot.setDomainGridlinePaint(Color.white);
 		plot.setRangeGridlinesVisible(true);
+		plot.setRangeGridlinePaint(Color.black);
+		plot.setRangeCrosshairPaint(Color.white);
 
 		plot.setDomainGridlinesVisible(false);
+		plot.setRangeGridlinePaint(Color.pink);
 		plot.setRangeGridlinesVisible(false);
-		plot.setBackgroundPaint(new Color(90,94,96));
-		plot.setOutlinePaint(Color.white);
+
 		ValueAxis xaxis = plot.getDomainAxis();
 //		xaxis.setLabelAngle( 90 * (Math.PI / 180.0) ); // time rotate
 		xaxis.setAutoRange(true);
-		xaxis.setLabel("Time");
+		xaxis.setLabel("time");
 		//Domain axis would show data of 60 seconds for a time
 //		xaxis.setFixedAutoRange(60000.0);  // size
 		xaxis.setVerticalTickLabels(false); // vertical or horizon
-		//////////		//////////		//////////		//////////		//////////		//////////		//////////		//////////		//////////		//////////		//////////
-		xaxis.setAxisLinePaint(Color.white);
-		xaxis.setLabelPaint(Color.white);
-		xaxis.setTickLabelPaint(Color.white);
-		xaxis.setTickMarkPaint(Color.white);
-		//////////		//////////		//////////		//////////		//////////		//////////		//////////		//////////		//////////		//////////		//////////
+		
 		ValueAxis yaxis = plot.getRangeAxis();
-		yaxis.setLabel("Price");
+		yaxis.setLabel("price");
 //		yaxis.setRange(8380000.0, 9010000.0); // y축 범위
 		yaxis.setAutoRange(true);
-		//////////		//////////		//////////		//////////		//////////		//////////		//////////		//////////		//////////		//////////		//////////
-		yaxis.setAxisLinePaint(Color.white);
-		yaxis.setLabelPaint(Color.white);
-		yaxis.setTickLabelPaint(Color.white);
-		yaxis.setTickMarkPaint(Color.white);
-		//////////		//////////		//////////		//////////		//////////		//////////		//////////		//////////		//////////		//////////		//////////
+		yaxis.setAxisLinePaint(Color.black);
+		
 //		setSize(new Dimension(800,400));
 		
 
@@ -191,7 +174,6 @@ public class ShowFrame extends ApplicationFrame{
 	public TimeSeries getSeries() {
 		return series;
 	}
-
 	
 	
 }
