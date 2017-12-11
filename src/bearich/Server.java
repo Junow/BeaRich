@@ -58,9 +58,11 @@ public class Server {
 				// must be done while locking the set of names.
 				while (true) {
 						out.println("SUBMITNAME");
-						name = in.readLine();
-
-					// check for duplication of name.
+						name = in.readLine();System.out.println("name : " + name);
+//					 check for duplication of name.
+//						if(name==null) {
+//							return;
+//						}
 					synchronized (names) {
 						if (!names.containsKey(name)) {
 							//the outputstream is stored in hash map with each name
@@ -68,8 +70,11 @@ public class Server {
 							break;
 						}
 						else {
-							out.println("ALREADY");
+							break;
 						}
+//						else {
+//							out.println("ALREADY");
+//						}
 					}
 				}
 
@@ -81,7 +86,11 @@ public class Server {
 					writer.println("ENTRANCE" + name);
 				}
 				writers.add(out);
-
+				///////				///////				///////				///////				///////				///////				///////				///////				///////				///////				///////				///////				///////
+				// assign account info to user
+//				WalletMain wallet = new WalletMain(name);
+				
+				///////				///////				///////				///////				///////				///////				///////				///////				///////				///////				///////				///////				///////
 				
 				
 				///////// start PriceThread //////////////
@@ -202,19 +211,15 @@ public class Server {
 			getPrice GP = new getPrice();
 			cnt++;
 			double price=0;
-			if(cnt<11) {
+			if(cnt<0) {
 				price = GP.get_price(GP.connect(currency));
 			}
 			else {
 				price = (Math.random()*100000*Math.random()*100000+Math.random());
 			}
-				
 			for (PrintWriter writer : writers) {
 				writer.println("price"+ currency.substring(0,3) +price);
 			}
-			
 		}
-		
-		
 	}
 }

@@ -23,7 +23,7 @@ import javax.swing.text.StyleContext;
 import javax.swing.text.StyledDocument;
 
 import org.jfree.data.time.Millisecond;
-//
+/////////////////
 public class chatClient extends ShowFrame implements ActionListener, UI{
 public chatClient(String title) {
       super(title);
@@ -71,9 +71,17 @@ public chatClient(String title) {
          }
       });
       
+      /////     /////     /////     /////     /////     /////     /////     /////     /////     /////     /////     /////     /////     /////     /////
+      //여기서 wallet 초기화
+      // 스레드 하나 만들어서 계속 값 쏴줘야함 (argument = myName)
+      String[] walletinfo = LoadService.LoadWallet(myName);
+      System.out.println("----------------------------");
+      for(int i=0;i<11;i++) {
+    	  	System.out.print(walletinfo[i]+" ");
+      }
+      System.out.println("----------------------------");
       
-      
-      
+      /////     /////     /////     /////     /////     /////     /////     /////     /////     /////     /////     /////     /////     /////     /////
       
       while (true) {
          
@@ -112,16 +120,21 @@ public chatClient(String title) {
             Null(line);
          }
          //when the user name is already used. server request a new name that is not exist.
-         else if(line.startsWith("ALREADY")) {
-            Already(line);
-         }
+//         else if(line.startsWith("ALREADY")) {
+//            Already(line);
+//         }
          //when a user logged out.
          else if(line.startsWith("OUT")) {
             Out(line);
          }
          else if(line.startsWith("price")){
+        	 /////        	 /////        	 /////        	 /////        	 /////        	 /////        	 /////        	 /////        	 /////        	 /////        	 /////        	 /////        	 /////        	 /////        	 /////
+        	 // thread setting user's wallet information
+        	 WalletThread wallet1 = new WalletThread(myName); wallet1.start();
+        	 
+        	 /////        	 /////        	 /////        	 /////        	 /////        	 /////        	 /////        	 /////        	 /////        	 /////        	 /////        	 /////        	 /////        	 /////        	 ////
             ////////// 쓰레드 하나 만들기
-//            System.out.println("hi thread");
+            System.out.println("hi thread");
             double newBTCPrice = Double.parseDouble(line.substring(8));
             double newETHPrice = Double.parseDouble(line.substring(8));
             double newDASHPrice = Double.parseDouble(line.substring(9));
@@ -319,9 +332,9 @@ public chatClient(String title) {
       messageArea.setCaretPosition(messageArea.getDocument().getLength());
    }
    
-   public String getName1() {
+   public String getMyName() {
 	   return this.myName;
    }
    
-   
+
 }

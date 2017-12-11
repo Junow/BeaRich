@@ -38,7 +38,7 @@ public class Client {
 		
 		while(true) {
 			id = log.getID();
-			System.out.println("id : " + id);
+			System.out.println("wating....");
 			if(id.compareTo("")!=0) {
 				System.out.println("break");
 				break;
@@ -51,6 +51,7 @@ public class Client {
 		chat_client.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		chat_client.frame.setVisible(true);
 		RefineryUtilities.centerFrameOnScreen(chat_client.frame);
+		chat_client.frame.pack();
 		chat_client.chatMain(id);
 	}
 

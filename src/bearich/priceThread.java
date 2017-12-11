@@ -1,5 +1,6 @@
 package bearich;
 
+
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -26,6 +27,7 @@ public class priceThread extends Thread{
 
 	// 가격 받았을떄만 받아서 series.add 하고 죽일 예정.
 	public void run() {
+//		System.out.println("hiThread");
 		series.add(new Millisecond(), newPrice);
 //		System.out.println(newPrice);
 	}
