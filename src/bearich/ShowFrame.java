@@ -99,8 +99,6 @@ public class ShowFrame extends ApplicationFrame{
 	ChartPanel ZECPanel;
 	ChartPanel QTUMPanel;
 
-
-
 	JPanel BTCwallet;
 	JPanel ETHwallet;
 	JPanel DASHwallet;
@@ -134,6 +132,17 @@ public class ShowFrame extends ApplicationFrame{
 	static JTextArea ZECPriceArea;
 	static JTextArea QTUMPriceArea;
 
+	public JTextArea BTCRate;
+	private JTextArea ETHRate;
+	private JTextArea DASHRate;
+	private JTextArea LTCRate;
+	private JTextArea ETCRate;
+	private JTextArea XRPRate;
+	private JTextArea BCHRate;
+	private JTextArea XMRRate;
+	private JTextArea ZECRate;
+	private JTextArea QTUMRate;
+	
 	JPanel BTCLabelPanel;
 	JPanel ETHLabelPanel;
 	JPanel DASHLabelPanel;
@@ -170,7 +179,7 @@ public class ShowFrame extends ApplicationFrame{
 		super(title);
 		/////////////      /////////////      /////////////      /////////////      /////////////      /////////////      /////////////      /////////////      /////////////      /////////////      /////////////      /////////////      
 		// Layout GUI
-		frame.setPreferredSize(new Dimension(1400,800));
+		frame.setPreferredSize(new Dimension(1400,850));
 
 		chartJPanel.setPreferredSize(new Dimension(1000,780)); // center panel size
 		chatPanel.setPreferredSize(new Dimension(380,780)); // right panel size
@@ -283,18 +292,19 @@ public class ShowFrame extends ApplicationFrame{
 		ZECPricePanel = new JPanel(); ZECPricePanel.setPreferredSize(new Dimension(395,92));
 		QTUMPricePanel = new JPanel(); QTUMPricePanel.setPreferredSize(new Dimension(395,92)); 
 
-		BTCPriceArea = new JTextArea("0,0");BTCPriceArea.setPreferredSize(new Dimension(395,46));BTCPricePanel.setLayout(new BorderLayout());BTCPricePanel.add(BTCPriceArea,"South");
-		ETHPriceArea = new JTextArea("0,0"); ETHPriceArea.setPreferredSize(new Dimension(395,46));ETHPricePanel.setLayout(new BorderLayout()); ETHPricePanel.add(ETHPriceArea,"South");
-		DASHPriceArea = new JTextArea("0,0"); DASHPriceArea.setPreferredSize(new Dimension(395,46)); DASHPricePanel.setLayout(new BorderLayout()); DASHPricePanel.add(DASHPriceArea,"South");
-		LTCPriceArea = new JTextArea("0,0"); LTCPriceArea.setPreferredSize(new Dimension(395,46)); LTCPricePanel.setLayout(new BorderLayout()); LTCPricePanel.add(LTCPriceArea,"South");
-		ETCPriceArea = new JTextArea("0,0"); ETCPriceArea.setPreferredSize(new Dimension(395,46)); ETCPricePanel.setLayout(new BorderLayout()); ETCPricePanel.add(ETCPriceArea,"South");
-		XRPPriceArea = new JTextArea("0,0"); XRPPriceArea.setPreferredSize(new Dimension(395,46)); XRPPricePanel.setLayout(new BorderLayout()); XRPPricePanel.add(XRPPriceArea,"South");
-		BCHPriceArea = new JTextArea("0,0"); BCHPriceArea.setPreferredSize(new Dimension(395,46)); BCHPricePanel.setLayout(new BorderLayout()); BCHPricePanel.add(BCHPriceArea,"South");
-		XMRPriceArea = new JTextArea("0,0"); XMRPriceArea.setPreferredSize(new Dimension(395,46)); XMRPricePanel.setLayout(new BorderLayout()); XMRPricePanel.add(XMRPriceArea, "South");
-		ZECPriceArea = new JTextArea("0,0"); ZECPriceArea.setPreferredSize(new Dimension(395,46)); ZECPricePanel.setLayout(new BorderLayout()); ZECPricePanel.add(ZECPriceArea, "South");
-		QTUMPriceArea = new JTextArea("0,0"); QTUMPriceArea.setPreferredSize(new Dimension(395,46)); QTUMPricePanel.setLayout(new BorderLayout()); QTUMPricePanel.add(QTUMPriceArea, "South");
+		
+		BTCPriceArea = new JTextArea("0.0");BTCPriceArea.setPreferredSize(new Dimension(395,20));BTCPricePanel.setLayout(new BorderLayout()); BTCPriceArea.setEditable(false);
+		ETHPriceArea = new JTextArea("0.0"); ETHPriceArea.setPreferredSize(new Dimension(395,20));ETHPricePanel.setLayout(new BorderLayout()); ETHPriceArea.setEditable(false);
+		DASHPriceArea = new JTextArea("0.0"); DASHPriceArea.setPreferredSize(new Dimension(395,20)); DASHPricePanel.setLayout(new BorderLayout()); DASHPriceArea.setEditable(false);
+		LTCPriceArea = new JTextArea("0.0"); LTCPriceArea.setPreferredSize(new Dimension(395,20)); LTCPricePanel.setLayout(new BorderLayout()); LTCPriceArea.setEditable(false);
+		ETCPriceArea = new JTextArea("0.0"); ETCPriceArea.setPreferredSize(new Dimension(395,20)); ETCPricePanel.setLayout(new BorderLayout()); ETCPriceArea.setEditable(false);
+		XRPPriceArea = new JTextArea("0.0"); XRPPriceArea.setPreferredSize(new Dimension(395,20)); XRPPricePanel.setLayout(new BorderLayout()); XRPPriceArea.setEditable(false);
+		BCHPriceArea = new JTextArea("0.0"); BCHPriceArea.setPreferredSize(new Dimension(395,20)); BCHPricePanel.setLayout(new BorderLayout()); BCHPriceArea.setEditable(false);
+		XMRPriceArea = new JTextArea("0.0"); XMRPriceArea.setPreferredSize(new Dimension(395,20)); XMRPricePanel.setLayout(new BorderLayout()); XMRPriceArea.setEditable(false);
+		ZECPriceArea = new JTextArea("0.0"); ZECPriceArea.setPreferredSize(new Dimension(395,20)); ZECPricePanel.setLayout(new BorderLayout()); ZECPriceArea.setEditable(false);
+		QTUMPriceArea = new JTextArea("0.0"); QTUMPriceArea.setPreferredSize(new Dimension(395,20)); QTUMPricePanel.setLayout(new BorderLayout()); QTUMPriceArea.setEditable(false);
 
-		BTCLabelPanel = new JPanel(); BTCLabelPanel.setLayout(new GridLayout(1,2));BTCLabelPanel.setPreferredSize(new Dimension(395,46)); JLabel btc = new JLabel("BTC"); BTCLabelPanel.add(btc); BTCPricePanel.add(BTCLabelPanel); 
+		BTCLabelPanel = new JPanel(); BTCLabelPanel.setLayout(new GridLayout(1,2));BTCLabelPanel.setPreferredSize(new Dimension(395,46)); JLabel btc = new JLabel("BTC"); BTCLabelPanel.add(btc); BTCPricePanel.add(BTCLabelPanel);
 		ETHLabelPanel = new JPanel(); ETHLabelPanel.setLayout(new GridLayout(1,2));ETHLabelPanel.setPreferredSize(new Dimension(395,46)); JLabel eth = new JLabel("ETH"); ETHLabelPanel.add(eth); ETHPricePanel.add(ETHLabelPanel);
 		DASHLabelPanel = new JPanel(); DASHLabelPanel.setLayout(new GridLayout(1,2));DASHLabelPanel.setPreferredSize(new Dimension(395,46)); JLabel dash = new JLabel("DASH"); DASHLabelPanel.add(dash); DASHPricePanel.add(DASHLabelPanel);
 		LTCLabelPanel = new JPanel(); LTCLabelPanel.setLayout(new GridLayout(1,2));LTCLabelPanel.setPreferredSize(new Dimension(395,46)); JLabel ltc = new JLabel("LTC"); LTCLabelPanel.add(ltc); LTCPricePanel.add(LTCLabelPanel);
@@ -304,7 +314,18 @@ public class ShowFrame extends ApplicationFrame{
 		XMRLabelPanel = new JPanel(); XMRLabelPanel.setLayout(new GridLayout(1,2));XMRLabelPanel.setPreferredSize(new Dimension(395,46)); JLabel xmr = new JLabel("XMR"); XMRLabelPanel.add(xmr); XMRPricePanel.add(XMRLabelPanel);
 		ZECLabelPanel = new JPanel(); ZECLabelPanel.setLayout(new GridLayout(1,2));ZECLabelPanel.setPreferredSize(new Dimension(395,46)); JLabel zec = new JLabel("ZEC"); ZECLabelPanel.add(zec); ZECPricePanel.add(ZECLabelPanel);
 		QTUMLabelPanel = new JPanel(); QTUMLabelPanel.setLayout(new GridLayout(1,2));QTUMLabelPanel.setPreferredSize(new Dimension(395,46)); JLabel qtum = new JLabel("QTUM"); QTUMLabelPanel.add(qtum); QTUMPricePanel.add(QTUMLabelPanel);
-
+		/////		/////		/////		/////		/////		/////		/////		/////		/////		/////
+		BTCRate = new JTextArea("0.0"); BTCRate.setPreferredSize(new Dimension(395,23)); JPanel bbttcc = new JPanel(); BTCPricePanel.add(bbttcc,"South"); bbttcc.setPreferredSize(new Dimension(395,46)); bbttcc.add(BTCPriceArea, "North"); bbttcc.add(BTCRate,"South");
+		ETHRate = new JTextArea("1.0"); ETHRate.setPreferredSize(new Dimension(395,23));JPanel eetthh=new JPanel(); ETHPricePanel.add(eetthh,"South"); eetthh.setPreferredSize(new Dimension(395,46)); eetthh.add(ETHPriceArea,"North"); eetthh.add(ETHRate,"South");
+		DASHRate = new JTextArea("2.0"); DASHRate.setPreferredSize(new Dimension(395,23));JPanel ddaass = new JPanel(); DASHPricePanel.add(ddaass, "South"); ddaass.setPreferredSize(new Dimension(395,46)); ddaass.add(DASHPriceArea,"North"); ddaass.add(DASHRate,"South");
+		LTCRate = new JTextArea("3.0"); LTCRate.setPreferredSize(new Dimension(395,23)); JPanel llttcc = new JPanel(); LTCPricePanel.add(llttcc, "South"); llttcc.setPreferredSize(new Dimension(395,46)); llttcc.add(LTCPriceArea,"North");llttcc.add(LTCRate,"South");
+		ETCRate = new JTextArea("0.0"); ETCRate.setPreferredSize(new Dimension(395,23));JPanel eettcc = new JPanel(); ETCPricePanel.add(eettcc,"South"); eettcc.setPreferredSize(new Dimension(395,46)); eettcc.add(ETCPriceArea,"North");eettcc.add(ETCRate,"South");
+		XRPRate = new JTextArea("0.0"); XRPRate.setPreferredSize(new Dimension(395,23));JPanel xxrrpp = new JPanel();XRPPricePanel.add(xxrrpp,"South"); xxrrpp.setPreferredSize(new Dimension(395,46)); xxrrpp.add(XRPPriceArea,"North"); xxrrpp.add(XRPRate,"South");
+		BCHRate = new JTextArea("0.0"); BCHRate.setPreferredSize(new Dimension(395,23));JPanel bbcchh = new JPanel(); BCHPricePanel.add(bbcchh,"South");bbcchh.setPreferredSize(new Dimension(395,46)); bbcchh.add(BCHPriceArea,"North"); bbcchh.add(BCHRate,"South");
+		XMRRate = new JTextArea("0.0"); XMRRate.setPreferredSize(new Dimension(395,23));JPanel xxmmrr = new JPanel(); XMRPricePanel.add(xxmmrr,"South"); xxmmrr.setPreferredSize(new Dimension(395,46)); xxmmrr.add(XMRPriceArea, "North"); xxmmrr.add(XMRRate,"South");
+		ZECRate = new JTextArea("0.0"); ZECRate.setPreferredSize(new Dimension(395,23));JPanel zzeecc = new JPanel(); ZECPricePanel.add(zzeecc,"South"); zzeecc.setPreferredSize(new Dimension(395,46)); zzeecc.add(ZECPriceArea,"North"); zzeecc.add(ZECRate,"South");
+		QTUMRate = new JTextArea("0.0"); QTUMRate.setPreferredSize(new Dimension(395,23));JPanel qqttuu = new JPanel(); QTUMPricePanel.add(qqttuu,"South"); qqttuu.setPreferredSize(new Dimension(395,46)); qqttuu.add(QTUMPriceArea,"North"); qqttuu.add(QTUMRate, "South");
+		/////		/////		/////		/////		/////		/////		/////		/////		/////		/////
 		BTCwallet.add(BTCPricePanel,"Center");
 		ETHwallet.add(ETHPricePanel,"Center");
 		DASHwallet.add(DASHPricePanel,"Center");
@@ -432,7 +453,6 @@ public class ShowFrame extends ApplicationFrame{
 		ZECchart.setBackgroundPaint(new Color(41,41,41));
 		QTUMchart.setBackgroundPaint(new Color(41,41,41));
 
-
 		textField.setBackground(new Color(240,240,240));
 		messageArea.setBackground(new Color(240,240,240));
 
@@ -526,19 +546,16 @@ public class ShowFrame extends ApplicationFrame{
 		return QTUMseries;
 	}
 
-	//to set wallet newly.
-	public void setWallet(String id) {
-		//	   WalletMain wall = new WalletMain(id);
-	}
 
 
-//	public void setBTCPriceArea(String bTCPriceArea) {
-//		//	BTCPriceArea = bTCPriceArea;
-//		BTCPriceArea.setText(bTCPriceArea);
-//	}
 	public static void setBTCPriceArea(String bTCPriceArea) {
 		BTCPriceArea.setText("");
 		BTCPriceArea.setText(bTCPriceArea);
+	}
+	public double getBTCPriceArea() {
+		String temp = BTCPriceArea.getText();
+		double a = Double.parseDouble(temp);
+		return a;
 	}
 	public static void setETHPriceArea(String eTHPriceArea) {
 		ETHPriceArea.setText("");
@@ -597,5 +614,19 @@ public class ShowFrame extends ApplicationFrame{
 	}
 	public static void setearnArea(String earn) {
 		earnArea.setText(earn);
+	}
+	
+	
+	public void setRate(String[] rate) {
+		this.BTCRate.setText("");  double a = Double.parseDouble(rate[0]);  this.BTCRate.setText(a*Double.parseDouble(this.BTCPriceArea.getText())+" KRW");
+		this.ETHRate.setText(""); this.ETHRate.setText(rate[1]+" KRW");
+		this.DASHRate.setText(""); this.DASHRate.setText(rate[2]+" KRW");
+		this.LTCRate.setText("");this.LTCRate.setText(rate[3]+" KRW");
+		this.ETCRate.setText("");this.ETCRate.setText(rate[4]+" KRW");
+		this.XRPRate.setText("");this.XRPRate.setText(rate[5]+" KRW");
+		this.BCHRate.setText("");this.BCHRate.setText(rate[6]+" KRW");
+		this.XMRRate.setText("");this.XMRRate.setText(rate[7]+" KRW");
+		this.ZECRate.setText("");this.ZECRate.setText(rate[8]+" KRW");
+		this.QTUMRate.setText("");this.QTUMRate.setText(rate[9]+" KRW");
 	}
 }

@@ -40,6 +40,7 @@ public class WalletThread extends Thread{
 		ShowFrame.setkrwArea(money);
 		
 		
+		
 		// asset informaions should be calculated.
 	}
 }

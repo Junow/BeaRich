@@ -6,7 +6,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 import java.net.Socket;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -35,6 +38,17 @@ public chatClient(String title) {
    PrintWriter out;
    
    private String myName="";
+   
+   private double newBTCPrice;
+   private double newETHPrice;
+   private double newDASHPrice;
+   private double newLTCPrice;
+   private double newETCPrice;
+   private double newXRPPrice;
+   private double newBCHPrice;
+   private double newXMRPrice;
+   private double newZECPrice;
+   private double newQTUMPrice;
    
 //   public chatClient() {
 ///////////////      /////////////      /////////////      /////////////      /////////////      /////////////      /////////////      /////////////      /////////////      /////////////      /////////////      /////////////      
@@ -130,21 +144,27 @@ public chatClient(String title) {
          else if(line.startsWith("price")){
         	 /////        	 /////        	 /////        	 /////        	 /////        	 /////        	 /////        	 /////        	 /////        	 /////        	 /////        	 /////        	 /////        	 /////        	 /////
         	 // thread setting user's wallet information
-        	 WalletThread wallet1 = new WalletThread(myName); wallet1.start();
+        	 
         	 
         	 /////        	 /////        	 /////        	 /////        	 /////        	 /////        	 /////        	 /////        	 /////        	 /////        	 /////        	 /////        	 /////        	 /////        	 ////
             ////////// 쓰레드 하나 만들기
             System.out.println("hi thread");
-            double newBTCPrice = Double.parseDouble(line.substring(8));
-            double newETHPrice = Double.parseDouble(line.substring(8));
-            double newDASHPrice = Double.parseDouble(line.substring(9));
-            double newLTCPrice = Double.parseDouble(line.substring(8));
-            double newETCPrice = Double.parseDouble(line.substring(8));
-            double newXRPPrice = Double.parseDouble(line.substring(8));
-            double newBCHPrice = Double.parseDouble(line.substring(8));
-            double newXMRPrice = Double.parseDouble(line.substring(8));
-            double newZECPrice = Double.parseDouble(line.substring(8));
-            double newQTUMPrice = Double.parseDouble(line.substring(8));
+
+//            double d = Double.parseDouble(String.format("%.5f", newBTCPrice));
+            
+           
+            
+            
+            newBTCPrice = Double.parseDouble(line.substring(8)); 
+            newETHPrice = Double.parseDouble(line.substring(8));
+            newDASHPrice = Double.parseDouble(line.substring(8));
+            newLTCPrice = Double.parseDouble(line.substring(8));
+            newETCPrice = Double.parseDouble(line.substring(8));
+            newXRPPrice = Double.parseDouble(line.substring(8));
+            newBCHPrice = Double.parseDouble(line.substring(8));
+            newXMRPrice = Double.parseDouble(line.substring(8));
+            newZECPrice = Double.parseDouble(line.substring(8));
+            newQTUMPrice = Double.parseDouble(line.substring(8));
             System.out.println("this is "+line);
             if(line.substring(5,8).compareTo("BTC")==0) {
                priceThread thr = new priceThread(socket,super.getBTCSeries(), newBTCPrice);
@@ -186,7 +206,27 @@ public chatClient(String title) {
                priceThread thr= new priceThread(socket,super.getQTUMSeries(), newQTUMPrice);
                thr.start();
             }
-
+            
+            WalletThread wallet1 = new WalletThread(myName); wallet1.start();
+            
+            String rate[] = new String[10];
+            NumberFormat f = NumberFormat.getInstance();
+            
+            rate[0]= Double.toString( newBTCPrice);
+            rate[1] = Double.toString(newETHPrice);
+            rate[2] = Double.toString(newDASHPrice);
+            rate[3] = Double.toString(newLTCPrice);
+            rate[4] = Double.toString(newETCPrice);
+            rate[5] = Double.toString(newXRPPrice);
+            rate[6] = Double.toString(newBCHPrice);
+            rate[7] = Double.toString(newXMRPrice);
+            rate[8] = Double.toString(newZECPrice);
+            rate[9] = Double.toString(newQTUMPrice);
+            
+            super.setRate(rate);
+            /////     /////     /////     /////     /////     /////     /////     /////     /////     /////     /////     /////     /////     /////     /////     /////     /////     /////     /////
+            
+            /////     /////     /////     /////     /////     /////     /////     /////     /////     /////     /////     /////     /////     /////     /////     /////     /////     /////     /////     /////
          }
 
       }
@@ -336,5 +376,8 @@ public chatClient(String title) {
 	   return this.myName;
    }
    
+   static double simplify(double d, double l, int n) {
+	      return Math.round(d * l * Math.pow(10, n)) / Math.pow(10, n);
+	   }
 
 }

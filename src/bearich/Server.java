@@ -191,7 +191,7 @@ public class Server {
 				time2 = System.currentTimeMillis ();
 				//5초에 한번씩만 업데이트할려고 함 time1 time2 차이
 				// 요청 10분에 600개 까지 가능 (1초에 한개)
-				if(Math.abs((time2-time1)/1000.0) >= 3) {
+				if(Math.abs((time2-time1)/1000.0) >= 5) {
 					time1 = System.currentTimeMillis (); 
 					sendPrice("BTC");
 					sendPrice("ETH");
