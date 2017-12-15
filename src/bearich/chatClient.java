@@ -64,10 +64,10 @@ public chatClient(String title) {
 ///////////////      /////////////      /////////////      /////////////      /////////////      /////////////      /////////////      /////////////      /////////////      /////////////      /////////////      /////////////      
 //   }
    
-   public void chatMain(String name) throws IOException {
+   public void chatMain() throws IOException {
       // Make connection and initialize streams
 //      String serverAddress = getServerAddress();
-	   myName = name;
+//	   myName = name;
 	   String serverAddress = "localhost";
       //create socket.
       Socket socket = new Socket(serverAddress, 9001);
@@ -77,7 +77,8 @@ public chatClient(String title) {
       out = new PrintWriter(socket.getOutputStream(), true);//
       // Process all messages from server, according to the protocol.
       
-      
+
+
       textField.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent e) {
             out.println(textField.getText());
@@ -88,27 +89,49 @@ public chatClient(String title) {
       /////     /////     /////     /////     /////     /////     /////     /////     /////     /////     /////     /////     /////     /////     /////
       //여기서 wallet 초기화
       // 스레드 하나 만들어서 계속 값 쏴줘야함 (argument = myName)
-      String[] walletinfo = LoadService.LoadWallet(myName);
-      System.out.println("----------------------------");
-      for(int i=0;i<11;i++) {
-    	  	System.out.print(walletinfo[i]+" ");
-      }
-      System.out.println("----------------------------");
+
+//      String[] walletinfo = LoadService.LoadWallet(myName);
+//      System.out.println("----------------------------");
+//      for(int i=0;i<11;i++) {
+//    	  	System.out.print(walletinfo[i]+" ");
+//      }
+//      System.out.println("----------------------------");
       
       /////     /////     /////     /////     /////     /////     /////     /////     /////     /////     /////     /////     /////     /////     /////
-      
+
+
+      Login log=null;
       while (true) {
-         
+
+
+
          String line = in.readLine();
-         System.out.println(line);
+         System.out.println(line+"?????????");
          
          if (line.startsWith("SUBMITNAME")) {
-        	 	out.println(myName);
+                log = new Login(out);
+                log.setVisible(true);log.pack();
+//                log.isOk(in, out);
+
+
+
 //        	 	this.pack();
 //        	 	this.frame.setVisible(true);
 //        	 	UIStart();
-         } 
+         }
+         else if(line.startsWith("WELCOME")){
+            System.out.println("welcome in client");
+            log.dispose();	
+            this.frame.setVisible(true);
+         }
+         else if(line.startsWith("RELOGIN")) {
+        	 	JOptionPane.showMessageDialog(null, "FAIL");
+        	 	log.dispose();
+//        	 	log.kill();
+//        	 	new Login(out);
+         }
          else if (line.startsWith("NAMEACCEPTED")) {
+//            chat_client.frame.setVisible(true);
             NameAccepted(line);
          } 
          else if (line.startsWith("MESSAGE")) {
@@ -150,7 +173,6 @@ public chatClient(String title) {
             ////////// 쓰레드 하나 만들기
             System.out.println("hi thread");
 
-//            double d = Double.parseDouble(String.format("%.5f", newBTCPrice));
             
            
             
@@ -208,20 +230,29 @@ public chatClient(String title) {
             }
             
             WalletThread wallet1 = new WalletThread(myName); wallet1.start();
-            
+
             String rate[] = new String[10];
-            NumberFormat f = NumberFormat.getInstance();
-            
-            rate[0]= Double.toString( newBTCPrice);
-            rate[1] = Double.toString(newETHPrice);
-            rate[2] = Double.toString(newDASHPrice);
-            rate[3] = Double.toString(newLTCPrice);
-            rate[4] = Double.toString(newETCPrice);
-            rate[5] = Double.toString(newXRPPrice);
-            rate[6] = Double.toString(newBCHPrice);
-            rate[7] = Double.toString(newXMRPrice);
-            rate[8] = Double.toString(newZECPrice);
-            rate[9] = Double.toString(newQTUMPrice);
+
+            DecimalFormat realBTCPrice = new DecimalFormat("#.#");
+            rate[0]= realBTCPrice.format(newBTCPrice*super.getBTCPriceArea());
+            DecimalFormat realETHPrice = new DecimalFormat("#.#");
+            rate[1] = realETHPrice.format(newETCPrice*super.getETHPriceArea());
+            DecimalFormat realDASHPrice = new DecimalFormat("#.#");
+            rate[2] = realDASHPrice.format(newDASHPrice*super.getDASHPriceArea());
+            DecimalFormat realLTCPrice = new DecimalFormat("#.#");
+            rate[3] = realDASHPrice.format(newLTCPrice*super.getLTCPriceArea());
+            DecimalFormat realETCPrice = new DecimalFormat("#.#");
+            rate[4] = realDASHPrice.format(newETCPrice*super.getETCPriceArea());
+            DecimalFormat realXRPPrice = new DecimalFormat("#.#");
+            rate[5] = realDASHPrice.format(newXRPPrice*super.getXRPPriceArea());
+            DecimalFormat realBCHPrice = new DecimalFormat("#.#");
+            rate[6] = realDASHPrice.format(newBCHPrice*super.getBCHPriceArea());
+            DecimalFormat realXMRPrice = new DecimalFormat("#.#");
+            rate[7] = realDASHPrice.format(newXMRPrice*super.getXMRPriceArea());
+            DecimalFormat realZECPrice = new DecimalFormat("#.#");
+            rate[8] = realDASHPrice.format(newZECPrice*super.getZECPriceArea());
+            DecimalFormat realQTUMPrice = new DecimalFormat("#.#");
+            rate[9] = realDASHPrice.format(newQTUMPrice*super.getQTUMPriceArea());
             
             super.setRate(rate);
             /////     /////     /////     /////     /////     /////     /////     /////     /////     /////     /////     /////     /////     /////     /////     /////     /////     /////     /////

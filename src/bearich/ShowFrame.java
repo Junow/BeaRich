@@ -293,15 +293,15 @@ public class ShowFrame extends ApplicationFrame{
 		QTUMPricePanel = new JPanel(); QTUMPricePanel.setPreferredSize(new Dimension(395,92)); 
 
 		
-		BTCPriceArea = new JTextArea("0.0");BTCPriceArea.setPreferredSize(new Dimension(395,20));BTCPricePanel.setLayout(new BorderLayout()); BTCPriceArea.setEditable(false);
-		ETHPriceArea = new JTextArea("0.0"); ETHPriceArea.setPreferredSize(new Dimension(395,20));ETHPricePanel.setLayout(new BorderLayout()); ETHPriceArea.setEditable(false);
-		DASHPriceArea = new JTextArea("0.0"); DASHPriceArea.setPreferredSize(new Dimension(395,20)); DASHPricePanel.setLayout(new BorderLayout()); DASHPriceArea.setEditable(false);
-		LTCPriceArea = new JTextArea("0.0"); LTCPriceArea.setPreferredSize(new Dimension(395,20)); LTCPricePanel.setLayout(new BorderLayout()); LTCPriceArea.setEditable(false);
-		ETCPriceArea = new JTextArea("0.0"); ETCPriceArea.setPreferredSize(new Dimension(395,20)); ETCPricePanel.setLayout(new BorderLayout()); ETCPriceArea.setEditable(false);
-		XRPPriceArea = new JTextArea("0.0"); XRPPriceArea.setPreferredSize(new Dimension(395,20)); XRPPricePanel.setLayout(new BorderLayout()); XRPPriceArea.setEditable(false);
-		BCHPriceArea = new JTextArea("0.0"); BCHPriceArea.setPreferredSize(new Dimension(395,20)); BCHPricePanel.setLayout(new BorderLayout()); BCHPriceArea.setEditable(false);
-		XMRPriceArea = new JTextArea("0.0"); XMRPriceArea.setPreferredSize(new Dimension(395,20)); XMRPricePanel.setLayout(new BorderLayout()); XMRPriceArea.setEditable(false);
-		ZECPriceArea = new JTextArea("0.0"); ZECPriceArea.setPreferredSize(new Dimension(395,20)); ZECPricePanel.setLayout(new BorderLayout()); ZECPriceArea.setEditable(false);
+		BTCPriceArea = new JTextArea("1.0");BTCPriceArea.setPreferredSize(new Dimension(395,20));BTCPricePanel.setLayout(new BorderLayout()); BTCPriceArea.setEditable(false);
+		ETHPriceArea = new JTextArea("2.0"); ETHPriceArea.setPreferredSize(new Dimension(395,20));ETHPricePanel.setLayout(new BorderLayout()); ETHPriceArea.setEditable(false);
+		DASHPriceArea = new JTextArea("3.0"); DASHPriceArea.setPreferredSize(new Dimension(395,20)); DASHPricePanel.setLayout(new BorderLayout()); DASHPriceArea.setEditable(false);
+		LTCPriceArea = new JTextArea("4.0"); LTCPriceArea.setPreferredSize(new Dimension(395,20)); LTCPricePanel.setLayout(new BorderLayout()); LTCPriceArea.setEditable(false);
+		ETCPriceArea = new JTextArea("5.0"); ETCPriceArea.setPreferredSize(new Dimension(395,20)); ETCPricePanel.setLayout(new BorderLayout()); ETCPriceArea.setEditable(false);
+		XRPPriceArea = new JTextArea("6.0"); XRPPriceArea.setPreferredSize(new Dimension(395,20)); XRPPricePanel.setLayout(new BorderLayout()); XRPPriceArea.setEditable(false);
+		BCHPriceArea = new JTextArea("7.0"); BCHPriceArea.setPreferredSize(new Dimension(395,20)); BCHPricePanel.setLayout(new BorderLayout()); BCHPriceArea.setEditable(false);
+		XMRPriceArea = new JTextArea("8.0"); XMRPriceArea.setPreferredSize(new Dimension(395,20)); XMRPricePanel.setLayout(new BorderLayout()); XMRPriceArea.setEditable(false);
+		ZECPriceArea = new JTextArea("9.0"); ZECPriceArea.setPreferredSize(new Dimension(395,20)); ZECPricePanel.setLayout(new BorderLayout()); ZECPriceArea.setEditable(false);
 		QTUMPriceArea = new JTextArea("0.0"); QTUMPriceArea.setPreferredSize(new Dimension(395,20)); QTUMPricePanel.setLayout(new BorderLayout()); QTUMPriceArea.setEditable(false);
 
 		BTCLabelPanel = new JPanel(); BTCLabelPanel.setLayout(new GridLayout(1,2));BTCLabelPanel.setPreferredSize(new Dimension(395,46)); JLabel btc = new JLabel("BTC"); BTCLabelPanel.add(btc); BTCPricePanel.add(BTCLabelPanel);
@@ -553,47 +553,143 @@ public class ShowFrame extends ApplicationFrame{
 		BTCPriceArea.setText(bTCPriceArea);
 	}
 	public double getBTCPriceArea() {
+
 		String temp = BTCPriceArea.getText();
 		double a = Double.parseDouble(temp);
+
+
 		return a;
+
+
 	}
 	public static void setETHPriceArea(String eTHPriceArea) {
 		ETHPriceArea.setText("");
 		ETHPriceArea.setText(eTHPriceArea);
 	}
+	public double getETHPriceArea() {
+		String temp = ETHPriceArea.getText();
+		System.out.println("ETH " + temp);
+		if(temp.compareTo("")!=0) {
+			double a = Double.parseDouble(temp);
+			return a;
+		}
+		else {
+			return 0;
+		}
+	}
 	public static void setDASHPriceArea(String dASHPriceArea) {
-			DASHPriceArea.setText("");
+		DASHPriceArea.setText("");
 		DASHPriceArea.setText(dASHPriceArea);
 	}
+	public double getDASHPriceArea() {
+		String temp = DASHPriceArea.getText();
+		if(temp.compareTo("")!=0) {
+			double a = Double.parseDouble(temp);
+			return a;
+		}
+		else {
+			return 0;
+		}
+	}
 	public static void setLTCPriceArea(String lTCPriceArea) {
-			LTCPriceArea.setText("");
+		LTCPriceArea.setText("");
 		LTCPriceArea.setText(lTCPriceArea);
 	}
+	public double getLTCPriceArea() {
+		String temp = LTCPriceArea.getText();
+		if(temp.compareTo("")!=0) {
+			double a = Double.parseDouble(temp);
+			return a;
+		}
+		else {
+			return 0;
+		}
+	}
 	public static void setETCPriceArea(String  eTCPriceArea) {
-			ETCPriceArea.setText("");
+		ETCPriceArea.setText("");
 		ETCPriceArea.setText(eTCPriceArea);
 	}
+	public double getETCPriceArea() {
+		String temp = ETCPriceArea.getText();
+		if(temp.compareTo("")!=0) {
+			double a = Double.parseDouble(temp);
+			return a;
+		}
+		else {
+			return 0;
+		}
+	}
 	public static void setXRPPriceArea(String  xRPPriceArea) {
-			XRPPriceArea.setText("");
+		XRPPriceArea.setText("");
 		XRPPriceArea.setText(xRPPriceArea);
 	}
+	public double getXRPPriceArea() {
+		String temp = XRPPriceArea.getText();
+		if(temp.compareTo("")!=0) {
+			double a = Double.parseDouble(temp);
+			return a;
+		}
+		else {
+			return 0;
+		}
+	}
 	public static void setBCHPriceArea(String bCHPriceArea) {
-			BCHPriceArea.setText("");
+		BCHPriceArea.setText("");
 		BCHPriceArea.setText(bCHPriceArea);
 	}
+	public double getBCHPriceArea() {
+		String temp = BCHPriceArea.getText();
+		if(temp.compareTo("")!=0) {
+			double a = Double.parseDouble(temp);
+			return a;
+		}
+		else {
+			return 0;
+		}
+	}
 	public static void setXMRPriceArea(String xMRPriceArea) {
-			XMRPriceArea.setText("");
+		XMRPriceArea.setText("");
 		XMRPriceArea.setText(xMRPriceArea);
+	}
+	public double getXMRPriceArea() {
+		String temp = XMRPriceArea.getText();
+		if(temp.compareTo("")!=0) {
+			double a = Double.parseDouble(temp);
+			return a;
+		}
+		else {
+			return 0;
+		}
 	}
 
 	public static void setZECPriceArea(String zECPriceArea) {
-			ZECPriceArea.setText("");
+		ZECPriceArea.setText("");
 		ZECPriceArea.setText(zECPriceArea);
+	}
+	public double getZECPriceArea() {
+		String temp = LTCPriceArea.getText();
+		if(temp.compareTo("")!=0) {
+			double a = Double.parseDouble(temp);
+			return a;
+		}
+		else {
+			return 0;
+		}
 	}
 
 	public static void setQTUMPriceArea(String  qTUMPriceArea) {
-			QTUMPriceArea.setText("");
+		QTUMPriceArea.setText("");
 		QTUMPriceArea.setText(qTUMPriceArea);
+	}
+	public double getQTUMPriceArea() {
+		String temp = LTCPriceArea.getText();
+		if(temp.compareTo("")!=0) {
+			double a = Double.parseDouble(temp);
+			return a;
+		}
+		else {
+			return 0;
+		}
 	}
 
 	public static void setkrwArea(String krw) {
@@ -618,7 +714,7 @@ public class ShowFrame extends ApplicationFrame{
 	
 	
 	public void setRate(String[] rate) {
-		this.BTCRate.setText("");  double a = Double.parseDouble(rate[0]);  this.BTCRate.setText(a*Double.parseDouble(this.BTCPriceArea.getText())+" KRW");
+		this.BTCRate.setText(""); this.BTCRate.setText(rate[0]+" KRW");
 		this.ETHRate.setText(""); this.ETHRate.setText(rate[1]+" KRW");
 		this.DASHRate.setText(""); this.DASHRate.setText(rate[2]+" KRW");
 		this.LTCRate.setText("");this.LTCRate.setText(rate[3]+" KRW");

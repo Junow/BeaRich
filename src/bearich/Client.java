@@ -1,4 +1,5 @@
 package bearich;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -29,30 +30,19 @@ import javax.swing.*;
 public class Client {
 
 
+    public static void main(String[] args) throws Exception {
+//		Login log = new Login();
+        System.out.println("Client is running...");
+        String title = "BeARich";
 
-	public static void main(String[] args) throws Exception {
-		Login log = new Login();
-		
-		String title = "BeARich";
-		String id="";
-		
-		while(true) {
-			id = log.getID();
-			System.out.println("wating....");
-			if(id.compareTo("")!=0) {
-				System.out.println("break");
-				break;
-			}
-		}
-		
-		
-		chatClient chat_client = new chatClient(title);
-	
-		chat_client.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		chat_client.frame.setVisible(true);
-		RefineryUtilities.centerFrameOnScreen(chat_client.frame);
-		chat_client.frame.pack();
-		chat_client.chatMain(id);
-	}
+
+        chatClient chat_client = new chatClient(title);
+
+        chat_client.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        chat_client.frame.setVisible(false);
+        RefineryUtilities.centerFrameOnScreen(chat_client.frame);
+        chat_client.frame.pack();
+		chat_client.chatMain();
+    }
 
 }
