@@ -245,10 +245,11 @@ public class Server {
             getPrice GP = new getPrice();
             cnt++;
             double price = 0;
-            if (cnt < 0) {
+            if (cnt < 11) {
                 price = GP.get_price(GP.connect(currency));
             } else {
                 price = (Math.random() * 100000 * Math.random() * 100000 + Math.random());
+                
             }
             for (PrintWriter writer : writers) {
                 writer.println("price" + currency.substring(0, 3) + price);
