@@ -9,12 +9,12 @@ public class LoginService {
 
    public static void main(String[] args) {
       // TODO Auto-generated method stub
-      boolean test = LoginTest("root","wnsgh159");
+      int test = LoginTest("root","wnsgh159");
 
    }
-   public static boolean LoginTest(String id, String pw) {
+   public static int LoginTest(String id, String pw) {
      
-	   boolean flag = false;
+	   int flag = 0;
        String driverName="com.mysql.jdbc.Driver";//DB 드라이버 ?
       String dbURL="jdbc:mysql://localhost:3306/userinfo";// DB 주
       
@@ -38,7 +38,7 @@ public class LoginService {
          while(rs.next()) {//rs 가 있는동안  
             getPass = rs.getString("PASSWORD");// rs에서 비밀번호 가져와서 get pass 에 저장 
             if(getPass.equals(pw)) {// get pass가 비밀번호랑 같은지 확인.
-               flag=true;// 리턴 
+               flag=1;// 리턴
             }
          }
          rs.close();
