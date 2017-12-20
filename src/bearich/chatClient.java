@@ -174,9 +174,6 @@ public chatClient(String title) {
             System.out.println("hi thread");
 
             
-           
-            
-            
             newBTCPrice = Double.parseDouble(line.substring(8)); 
             newETHPrice = Double.parseDouble(line.substring(8));
             newDASHPrice = Double.parseDouble(line.substring(8));

@@ -35,7 +35,6 @@ public class Client {
         System.out.println("Client is running...");
         String title = "BeARich";
 
-
         chatClient chat_client = new chatClient(title);
 
         chat_client.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

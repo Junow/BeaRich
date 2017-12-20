@@ -26,7 +26,7 @@ public class SignupService {
 			Class.forName(driverName);// 모름  
 			con=DriverManager.getConnection(dbURL,"root","wnsgh159");//DB 연
 			System.out.println("Driver connection success!!");
-			sql="insert into info values (?,0,0,0,0,0,0,0,0,0,0,10000000,?)"; // 쿼리문 세팅 aka 총알  
+			sql="insert into info values (?,0,0,0,0,0,0,0,0,0,0,10000000,?,0)"; // 쿼리문 세팅 aka 총알  
 			pstmt = con.prepareStatement(sql);// 쿼리문을 디비에 aka 탄집   
 
 			pstmt.setString(1, id);
